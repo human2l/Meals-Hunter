@@ -8,6 +8,7 @@ import { RestaurantsContext } from "../../../services/restaurants/restaurants.co
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { Search } from "../components/search.component";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
@@ -26,6 +27,7 @@ const LoadingContainer = styled.View`
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { isLoading, restaurants } = useContext(RestaurantsContext);
+  const { favourites } = useContext(FavouritesContext);
   return (
     <SafeArea>
       <Search />
