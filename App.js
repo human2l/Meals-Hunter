@@ -4,8 +4,10 @@ import {
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components/native";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 import { theme } from "./src/infrastructure/theme";
 
@@ -14,6 +16,21 @@ import { LocationContextProvider } from "./src/services/location/location.contex
 
 import { Navigation } from "./src/infrastructure/navigation";
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyA8WlQiiwp4ZHU1uTMauwPVcanmB7bh62I",
+  authDomain: "meals-hunter.firebaseapp.com",
+  projectId: "meals-hunter",
+  storageBucket: "meals-hunter.appspot.com",
+  messagingSenderId: "869147866840",
+  appId: "1:869147866840:web:00f63a7befaa761c0949ad",
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   let [oswaldLoaded] = useOswald({
@@ -30,13 +47,15 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <AuthenticationContextProvider>
+          <FavouritesContextProvider>
+            <LocationContextProvider>
+              <RestaurantsContextProvider>
+                <Navigation />
+              </RestaurantsContextProvider>
+            </LocationContextProvider>
+          </FavouritesContextProvider>
+        </AuthenticationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>

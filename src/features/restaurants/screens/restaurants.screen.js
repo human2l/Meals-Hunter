@@ -13,7 +13,8 @@ import { FavouritesBar } from "../../../components/favourites/favourites.bar.com
 
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
-    padding: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
 })``;
 
