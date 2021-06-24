@@ -1,6 +1,6 @@
 import React from "react";
 import WebView from "react-native-webview";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { Platform } from "react-native";
 import { Text } from "../typography/text.component";
 
